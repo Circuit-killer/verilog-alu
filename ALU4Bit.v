@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module ALU4Bit(a, b, op, cin, less, result, cout, G, P, set, overflow, zero);
+module ALU4Bit(a, b, cin, less, op, result, cout, G, P, set, overflow, zero);
   input [3:0] a, b;
   input [2:0] op;
   input cin;
