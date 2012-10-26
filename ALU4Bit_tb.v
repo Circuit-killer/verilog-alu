@@ -8,8 +8,9 @@ module ALU4Bit_tb();
   wire G, P;
   wire set;
   wire overflow;
+  wire zero;
 
-  ALU4Bit alu(a, b, op, result, cout, G, P, set, overflow);
+  ALU4Bit alu(a, b, op, op[2], set, result, cout, G, P, set, overflow, zero);
 
   initial begin
     $monitor("    %b [%b] %b = R: %b   O: %b   C: %b   S: %b", a, op, b, result, overflow, cout, set);
