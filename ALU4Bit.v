@@ -24,5 +24,5 @@ module ALU4Bit(a, b, cin, less, op, result, cout, G, P, set, overflow, zero);
   ALU1Bit alu4(a[3], b[3], C3, low, op, result[3],, g3, p3, set);
 
   OverflowDetection ovf(a[3], b[3], op, result[3], overflow);
-  CLA cla(g0, p0, g1, p1, g2, p2, g3, p3, op[2], C1, C2, C3, cout, G, P);
+  CLA cla(g0, p0, g1, p1, g2, p2, g3, p3, cin, C1, C2, C3, cout, G, P);
 endmodule
