@@ -29,6 +29,10 @@ module ALU4Bit_tb();
     a <= 'b 1001; b <= 'b 0111; op <= 'b 010;
     #1;
 
+    $display("Test SUB with pos and neg (7 - 7)");
+    a <= 'b 0111; b <= 'b 0111; op <= 'b 110;
+    #1;
+
     $display("Test SUB with overflow (-7 - 7)");
     a <= 'b 1001; b <= 'b 0111; op <= 'b 110;
     #1;
