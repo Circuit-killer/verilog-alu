@@ -7,7 +7,7 @@ module OverflowDetection_tb();
   OverflowDetection ovf(a, b, op, result, overflow);
 
   initial begin
-    $monitor("    a: %b   b: %b   S: %b   O: %b", a, b, result, overflow);
+    $monitor("  a:%b  b:%b  S:%b  O:%b", a, b, result, overflow);
 
     op <= 'b 010;
 

@@ -7,7 +7,7 @@ module ALU1Bit_tb();
   ALU1Bit alu(a, b, cin, less, op, result, cout, g, p, set);
 
   initial begin
-    $monitor("    %b [%b] %b = R: %b   C: %b", a, op, b, result, cout);
+    $monitor("    %b [%b] %b = %b  C:%b", a, op, b, result, cout);
 
     cin <= 0; less <= 0;
 

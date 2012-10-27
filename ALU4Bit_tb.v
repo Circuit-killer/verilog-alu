@@ -7,7 +7,7 @@ module ALU4Bit_tb();
   ALU4Bit alu(a, b, op[2], set, op, result, cout, G, P, set, overflow, zero);
 
   initial begin
-    $monitor("    %b [%b] %b = R: %b   O: %b   C: %b   S: %b", a, op, b, result, overflow, cout, set);
+    $monitor("  %b [%b] %b = %b  O:%b  C:%b  S:%b  Z:%b", a, op, b, result, overflow, cout, set, zero);
 
     $display("Test AND with b-inverse");
     a <= 'b 1111; b <= 'b 0010; op <= 'b 100;

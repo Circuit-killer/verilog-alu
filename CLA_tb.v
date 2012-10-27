@@ -7,7 +7,7 @@ module CLA_tb();
   CLA cla(g0, p0, g1, p1, g2, p2, g3, p3, cin, C1, C2, C3, C4, G, P);
 
   initial begin
-    $monitor("    P: %b   G: %b   C: %b", P, G, C4);
+    $monitor("  P:%b  G:%b  C:%b", P, G, C4);
 
     $display("Test 1 (from exam)");
     g0 <= 0; g1 <= 1; g2 <= 1; g3 <= 0;
