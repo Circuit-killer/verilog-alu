@@ -1,14 +1,9 @@
 module ALU4Bit(a, b, cin, less, op, result, cout, G, P, set, overflow, zero);
   input [3:0] a, b;
+  input cin, less;
   input [2:0] op;
-  input cin;
-  input less;
   output [3:0] result;
-  output cout;
-  output G, P;
-  output set;
-  output overflow;
-  output zero;
+  output cout, G, P, set, overflow, zero;
 
   wire g0, p0, g1, p1, g2, p2, g3, p3;
   wire C1, C2, C3;

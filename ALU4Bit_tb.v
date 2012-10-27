@@ -2,11 +2,7 @@ module ALU4Bit_tb();
   reg [3:0] a, b;
   reg [2:0] op;
   wire [3:0] result;
-  wire cout;
-  wire G, P;
-  wire set;
-  wire overflow;
-  wire zero;
+  wire cout, G, P, set, overflow, zero;
 
   ALU4Bit alu(a, b, op[2], set, op, result, cout, G, P, set, overflow, zero);
 
