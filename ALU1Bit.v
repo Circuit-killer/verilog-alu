@@ -1,5 +1,3 @@
-`timescale 1ns / 1ps
-
 module ALU1Bit(a, b, cin, less, op, result, cout, g, p, set);
   input a, b, cin;
   input [2:0] op;

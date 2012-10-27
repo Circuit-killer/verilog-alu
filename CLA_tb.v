@@ -1,5 +1,3 @@
-`timescale 1ns / 1ps
-
 module CLA_tb();
   reg g0, p0, g1, p1, g2, p2, g3, p3;
   reg cin;

@@ -1,5 +1,3 @@
-`timescale 1ns / 1ps
-
 module OverflowDetection(a, b, op, result, overflow);
   input a, b;
   input [2:0] op;

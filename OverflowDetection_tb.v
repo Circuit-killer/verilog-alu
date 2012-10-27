@@ -1,5 +1,3 @@
-`timescale 1ns / 1ps
-
 module OverflowDetection_tb();
   reg a, b;
   reg [2:0] op;

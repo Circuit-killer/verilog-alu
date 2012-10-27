@@ -1,5 +1,3 @@
-`timescale 1ns / 1ps
-
 module ALU1Bit_tb();
   reg a, b, cin;
   reg [2:0] op;

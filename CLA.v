@@ -1,5 +1,3 @@
-`timescale 1ns / 1ps
-
 module CLA(g0, p0, g1, p1, g2, p2, g3, p3, cin, C1, C2, C3, C4, G, P);
   input g0, p0, g1, p1, g2, p2, g3, p3;
   input cin;
