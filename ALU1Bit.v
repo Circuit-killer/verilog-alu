@@ -14,7 +14,7 @@ module ALU1Bit(a, b, cin, less, op, result, cout, g, p, set);
 
   reg bval;
 
-  always @(a or b or cin or op or less) begin
+  always @(*) begin
     bval = b ^ op[2];
 
     // AND
