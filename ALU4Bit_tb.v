@@ -57,23 +57,6 @@ module ALU4Bit_tb();
     a <= 'b 1111; b <= 'b 0000; op <= 'b 111;
     #1;
 
-    // $display("Test ADD with all possible inputs");
-    // op <= 2;
-    // a <= 0;
-
-    // repeat (15) begin
-    //   b <= 0;
-    //   #1;
-
-    //   repeat (15) begin
-    //     b <= b + 1;
-    //     #1;
-    //   end
-
-    //   a <= a + 1;
-    //   #1;
-    // end
-
     $finish;
   end
 endmodule
