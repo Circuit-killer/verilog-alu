@@ -57,6 +57,14 @@ module ALU4Bit_tb();
     a <= 'b 1111; b <= 'b 0000; op <= 'b 111;
     #1;
 
+    $display("Test SLT with -8 and 1 (-8 < 1)");
+    a <= 'b 1000; b <= 'b 0001; op <= 'b 011;
+    #1;
+
+    $display("Test SLT with -8 and 0 (-8 < 0)");
+    a <= 'b 1000; b <= 'b 0000; op <= 'b 011;
+    #1;
+
     $finish;
   end
 endmodule
