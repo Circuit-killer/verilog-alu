@@ -1,30 +1,22 @@
-module ALU1Bit(a, b, cin, less, op, result, cout, g, p, set);
-  input a, b, cin, less;
+module ALU1Bit(a, bin, cin, less, op, result, cout, g, p, set);
+  input a, bin, cin, less;
   input [2:0] op;
-  output result;
-  output cout;
-  output g, p;
-  output set;
+  output reg result;
+  output cout, g, p, set;
 
-  reg result;
-  reg cout;
-  reg g, p;
-  reg set;
+  // Invert b if necessary.
+  wire b = bin ^ op[2];
 
-  reg bval;
+  // AND
+  assign g = a & b;
+  // OR
+  assign p = a | b;
+  // Sum
+  assign set = a ^ b ^ cin;
+  // Carry out
+  assign cout = a & b | a & cin | b & cin;
 
   always @(*) begin
-    bval = b ^ op[2];
-
-    // AND
-    g = a & bval;
-    // OR
-    p = a | bval;
-    // Sum
-    set = a ^ bval ^ cin;
-    // Carry out
-    cout = a & bval | a & cin | bval & cin;
-
     casez (op)
     // a AND b
     'b ?00: result = g;
