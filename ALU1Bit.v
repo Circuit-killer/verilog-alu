@@ -19,13 +19,13 @@ module ALU1Bit(a, bin, cin, less, op, result, cout, g, p, set);
   always @(*) begin
     casez (op)
     // a AND b
-    'b ?00: result = g;
+    'b ?00: result <= g;
     // a OR b
-    'b ?01: result = p;
+    'b ?01: result <= p;
     // a ADD/SUB b
-    'b ?10: result = set;
+    'b ?10: result <= set;
     // a SLT b
-    'b ?11: result = less;
+    'b ?11: result <= less;
     endcase
   end
 endmodule
