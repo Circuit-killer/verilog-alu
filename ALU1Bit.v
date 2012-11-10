@@ -1,7 +1,6 @@
 module ALU1Bit(a, b, cin, less, op, result, cout, g, p, set);
-  input a, b, cin;
+  input a, b, cin, less;
   input [2:0] op;
-  input less;
   output result;
   output cout;
   output g, p;
@@ -28,13 +27,13 @@ module ALU1Bit(a, b, cin, less, op, result, cout, g, p, set);
 
     casez (op)
     // a AND b
-    3'b ?00: result = g;
+    'b ?00: result = g;
     // a OR b
-    3'b ?01: result = p;
+    'b ?01: result = p;
     // a ADD/SUB b
-    3'b ?10: result = set;
+    'b ?10: result = set;
     // a SLT b
-    3'b ?11: result = less;
+    'b ?11: result = less;
     endcase
   end
 endmodule
