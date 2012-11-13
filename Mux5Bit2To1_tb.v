@@ -1,7 +1,7 @@
 module Mux5Bit2To1_tb();
   reg [4:0] a, b;
   reg op;
-  output [4:0] result;
+  wire [4:0] result;
 
   Mux5Bit2To1 mux(a, b, op, result);
 
