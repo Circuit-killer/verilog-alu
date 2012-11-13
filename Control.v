@@ -93,7 +93,7 @@ module Control(opcode, funct, ALUSrc, RegDst, MemWrite, MemRead, Beq, Bne, Jump,
       MemRead <= 0;
       Beq <= 0;
       Bne <= 0;
-      Jump <= 2;
+      Jump <= 1;
       RegWrite <= 0;
     end
     endcase
