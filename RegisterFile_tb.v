@@ -45,6 +45,10 @@ module RegisterFile_tb();
     #4;
     ReadRegister1 = 31;
 
+    #4;
+    ReadRegister1 <= 0; ReadRegister2 <= 0; WriteRegister <= 0; WriteData <= 0;
+    RegWrite <= 0;
+
     $finish;
   end
 endmodule
