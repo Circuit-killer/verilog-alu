@@ -8,18 +8,25 @@ module RegisterFile(ReadRegister1, ReadRegister2, WriteRegister, WriteData,
   // 31 cells with 31 bits each
   reg [31:0] tab[31:0];
 
-  // Zero all the cells
   integer i;
   initial begin
+    // Zero all the cells
     for (i = 0; i < 32; i = i + 1)
       tab[i] <= 0;
+
+    // Load some data.
+    tab[1] <= 4;
+    tab[4] <= 2;
   end
 
   always @(posedge Clk) begin
-    if (RegWrite)
+    if (RegWrite && WriteRegister) begin
+      $display("REG[%b] = %b", WriteRegister, WriteData);
+
       // This must be a blocking assignment so writes are propogated in the same
       // cycle.
       tab[WriteRegister] = WriteData;
+    end
 
     ReadData1 <= tab[ReadRegister1];
     ReadData2 <= tab[ReadRegister2];

@@ -1,5 +1,5 @@
 module DataMemory_tb();
-  reg [6:0] Address;
+  reg [31:0] Address;
   reg [31:0] WriteData;
   reg MemRead, MemWrite, Clk;
   wire [31:0] ReadData;

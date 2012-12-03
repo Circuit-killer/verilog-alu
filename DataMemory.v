@@ -1,21 +1,30 @@
 module DataMemory(Address, WriteData, MemRead, MemWrite, Clk, ReadData);
-  input [6:0] Address;
-  input [31:0] WriteData;
-  input MemRead, MemWrite, Clk;
-  output reg [31:0] ReadData;
+  parameter SLOT_SIZE = 32 - 1;
+  parameter NUM_SLOTS = 32 - 1;
 
-  // 128 (2^7) cells with 32 bits each
-  reg [31:0] tab[127:0];
+  input [31:0] Address;
+  input [SLOT_SIZE:0] WriteData;
+  input MemRead, MemWrite, Clk;
+  output reg [SLOT_SIZE:0] ReadData;
+
+  reg [SLOT_SIZE:0] tab[NUM_SLOTS:0];
 
   integer i;
   initial begin
-    for (i = 0; i < 128; i = i + 1)
+    // Zero all the cells.
+    for (i = 0; i <= NUM_SLOTS; i = i + 1)
       tab[i] <= 0;
+
+    // Load some data.
+    tab[8] <= 'h dead_dad5;
+    tab[20] <= 'h beef_b00b;
   end
 
   always @(posedge Clk) begin
-    if (MemWrite)
+    if (MemWrite) begin
+      $display("MEM[%b] = %b", Address, WriteData);
       tab[Address] = WriteData;
+    end
 
     if (MemRead)
       ReadData <= tab[Address];
