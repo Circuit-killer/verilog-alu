@@ -96,6 +96,21 @@ module Control(opcode, funct, ALUSrc, RegDst, MemWrite, MemRead, Beq, Bne, Jump,
       Jump <= 1;
       RegWrite <= 0;
     end
+
+    // addi
+    'b 001000: begin
+      ALUSrc <= 1;
+      RegDst <= 0;
+      MemWrite <= 0;
+      MemRead <= 0;
+      Beq <= 0;
+      Bne <= 0;
+      Jump <= 0;
+      MemToReg <= 0;
+      RegWrite <= 1;
+      // ADD
+      ALUControl <= 'b 010;
+    end
     endcase
   end
 endmodule
