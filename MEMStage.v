@@ -14,9 +14,12 @@ module MEMStage(
     MEMRd <= 0; MEMData <= 0; MEMRegWrite <= 0;
   end
 
+  // Hold the current word loaded from memory
   wire [31:0] mem;
   DataMemory dm(EXALUData, EXData, EXMemRead, EXMemWrite, Clk, mem);
 
+  // Hold ALU result from R-type instructions and memory word for lw
+  // instruction.
   wire [31:0] data;
   Mux32Bit2To1 memmux(EXALUData, mem, EXMemRead, data);
 

@@ -48,19 +48,23 @@ module Pipeline();
 
   WBStage wbs(MEMRd, MEMData, MEMRegWrite, SubClk, WBRd, WBData, WBRegWrite);
 
+  // Run the main clock at 5 ticks per cycle, one for each stage.
   initial begin
     Clk <= 1;
     forever #5 Clk <= ~Clk;
   end
 
+  // Run a clock cycle within the high cycle of the main clock so the registers
+  // are written in WB before they're read in ID (in the next low cycle of Clk.)
   always @(posedge Clk) begin
     SubClk <= 0;
     #1;
     SubClk <= 1;
   end
 
+  // Run for an arbitrary number of ticks so all instructions complete.
   initial begin
-    #500;
+    #350;
     $finish;
   end
 endmodule

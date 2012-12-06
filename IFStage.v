@@ -11,8 +11,10 @@ module IFStage(
     pc <= 0; Inst <= 0;
   end
 
+  // Holds the current index into instruction memory
   reg [31:0] pc;
 
+  // Hold the current instruction
   wire [31:0] mem;
   InstructionMemory im(pc, Clk, mem);
 

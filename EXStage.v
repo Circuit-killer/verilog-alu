@@ -29,17 +29,18 @@ module EXStage(
     EXALUData <= 0;
   end
 
+  // Op bits for the ALU input muxes
   reg [2:0] fwd_a, fwd_b;
 
   always @(*) begin
-    // Forward from previous cycle.
     if (MEMRegWrite && MEMRd && MEMRd == Rs)
+      // Forward from previous cycle.
       fwd_a <= 'b 01;
-    // Forward from second previous cycle.
     else if (WBRegWrite && WBRd && WBRd == Rs)
+      // Forward from second previous cycle.
       fwd_a <= 'b 10;
-    // Don't forward.
     else
+      // Don't forward.
       fwd_a <= 'b 00;
 
     if (MEMRegWrite && MEMRd && MEMRd == Rt)
@@ -50,15 +51,19 @@ module EXStage(
       fwd_b <= 'b 00;
   end
 
+  // Hold the first input into the ALU
   wire [31:0] input_a;
   Mux32Bit3To1 fam(DataA, MEMData, WBData, fwd_a, input_a);
 
+  // Holds the second input into the ALU or the word to store to memory
   wire[31:0] data_b;
   Mux32Bit3To1 fbm(DataB, MEMData, WBData, fwd_b, data_b);
 
+  // Holds the second input into the ALU
   wire [31:0] input_b;
   Mux32Bit2To1 ibm(data_b, SignExtend, ALUSrc, input_b);
 
+  // Holds the R-type result or the calculated address
   wire [31:0] alu_result;
   ALU32Bit alu(input_a, input_b, ALUControl, alu_result,,,);
 
