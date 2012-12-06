@@ -72,15 +72,15 @@ module IDStage(
     Branch <= cmp & beq | ~cmp & bne;
     Jump <= jump;
 
-    // Ignore everything else if jumping.
     if (Jump)
+    // Ignore everything else if jumping.
       Stall <= 0;
-    // Stall on branch forwarding hazard.
-    else if (EXRegWrite && EXRd && (EXRd == rs || EXRd == rt))
-      Stall <= beq | bne;
     // Stall on load hazard.
     else if (EXMemRead && EXRd && (EXRd == rs || EXRd == rt))
       Stall <= 1;
+    // Stall on branch forward hazard.
+    else if (EXRegWrite && EXRd && (EXRd == rs || EXRd == rt))
+      Stall <= beq | bne;
     else
       Stall <= 0;
 
