@@ -60,7 +60,7 @@ module Pipeline();
   end
 
   initial begin
-    #130;
+    #500;
     $finish;
   end
 endmodule
