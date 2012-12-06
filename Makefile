@@ -1,3 +1,5 @@
+BINARY = pl
+
 SRC = \
 	ALU16Bit.v \
 	ALU1Bit.v \
@@ -21,8 +23,8 @@ STAGES = \
 	 MEMStage.v \
 	 WBStage.v \
 
+$(BINARY): Pipeline.v $(SRC) $(STAGES)
+	iverilog -Wimplicit -o $@ $^
+
 src:
 	@echo $(SRC) $(STAGES)
-
-flags:
-	@echo -Wimplicit
