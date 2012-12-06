@@ -18,7 +18,7 @@ module DataMemory(Address, WriteData, MemRead, MemWrite, Clk, ReadData);
 
   always @(posedge Clk) begin
     if (MemWrite) begin
-      $display("MEM[%b] = %b", Address, WriteData);
+      $display("MEM[%h] = %b", Address, WriteData);
       tab[Address] = WriteData;
     end
 
