@@ -1,4 +1,4 @@
-module IFID_tb();
+module Pipeline();
   reg Clk;
 
   wire [31:0] Inst;
