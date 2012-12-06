@@ -1,5 +1,6 @@
 module Pipeline();
   reg Clk;
+  reg SubClk;
 
   wire [31:0] Inst;
   wire EXRegWrite;
@@ -34,7 +35,7 @@ module Pipeline();
   IFStage ifs(Branch, Jump, Stall, BranchOffset, JumpAddress, Clk, Inst);
 
   IDStage ids(Inst, EXRegWrite, EXMemRead, EXRd, MEMRegWrite, MEMData, MEMRd,
-    WBRegWrite, WBData, WBRd, Clk, Branch, Jump, Stall, BranchOffset,
+    WBRegWrite, WBData, WBRd, Clk, SubClk, Branch, Jump, Stall, BranchOffset,
     JumpAddress, ALUSrc, ALUControl, MemRead, MemWrite, RegWrite, DataA, DataB,
     SignExtend, Rs, Rt, Rd);
 
@@ -45,11 +46,17 @@ module Pipeline();
   MEMStage ms(EXRegWrite, EXMemRead, EXMemWrite, EXRd, EXData, EXALUData, Clk,
     MEMRd, MEMData, MEMRegWrite);
 
-  WBStage wbs(MEMRd, MEMData, MEMRegWrite, Clk, WBRd, WBData, WBRegWrite);
+  WBStage wbs(MEMRd, MEMData, MEMRegWrite, SubClk, WBRd, WBData, WBRegWrite);
 
   initial begin
     Clk <= 1;
     forever #5 Clk <= ~Clk;
+  end
+
+  always @(posedge Clk) begin
+    SubClk <= 0;
+    #1;
+    SubClk <= 1;
   end
 
   initial begin

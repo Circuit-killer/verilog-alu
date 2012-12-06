@@ -10,6 +10,7 @@ module IDStage(
   input [31:0] WBData,
   input [4:0] WBRd,
   input Clk,
+  input SubClk,
   output reg Branch,
   output reg Jump,
   output reg Stall,
@@ -48,7 +49,7 @@ module IDStage(
     memtoreg, regwrite, alucontrol);
 
   wire [31:0] reg_a, reg_b;
-  RegisterFile rf(rs, rt, WBRd, WBData, WBRegWrite, Clk, reg_a, reg_b);
+  RegisterFile rf(rs, rt, WBRd, WBData, WBRegWrite, SubClk, reg_a, reg_b);
 
   wire [31:0] sign_ex;
   SignExtension se(imm, sign_ex);

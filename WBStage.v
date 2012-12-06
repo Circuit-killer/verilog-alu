@@ -2,7 +2,7 @@ module WBStage(
   input [4:0] MEMRd,
   input [31:0] MEMData,
   input MEMRegWrite,
-  input Clk,
+  input SubClk,
   output reg [4:0] WBRd,
   output reg [31:0] WBData,
   output reg WBRegWrite
@@ -11,8 +11,7 @@ module WBStage(
     WBRd <= 0; WBData <= 0; WBRegWrite <= 0;
   end
 
-  always @(negedge Clk) begin
-    // Run on the first tick of the negative edge.
+  always @(negedge SubClk) begin
     WBRd <= MEMRd;
     WBData <= MEMData;
     WBRegWrite <= MEMRegWrite;
