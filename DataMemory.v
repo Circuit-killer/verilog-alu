@@ -14,10 +14,6 @@ module DataMemory(Address, WriteData, MemRead, MemWrite, Clk, ReadData);
     // Zero all the cells.
     for (i = 0; i <= NUM_SLOTS; i = i + 1)
       tab[i] <= 0;
-
-    // Load some data.
-    tab[8] <= 'h dead_dad5;
-    tab[20] <= 'h beef_b00b;
   end
 
   always @(posedge Clk) begin

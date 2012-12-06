@@ -13,10 +13,6 @@ module RegisterFile(ReadRegister1, ReadRegister2, WriteRegister, WriteData,
     // Zero all the cells
     for (i = 0; i < 32; i = i + 1)
       tab[i] <= 0;
-
-    // Load some data.
-    tab[1] <= 4;
-    tab[4] <= 2;
   end
 
   always @(posedge Clk) begin
