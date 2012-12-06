@@ -23,7 +23,7 @@ module IFStage(
     // Run one ticks after IDStage (four after WBStage).
     #4;
 
-    // Keep the current PC if stalling.
+    // Keep the current PC and instruction if stalling.
     if (!Stall) begin
       if (Jump)
         // Don't need to multiply by two because JumpAddress is a word address.
@@ -33,12 +33,9 @@ module IFStage(
         pc <= pc_next + BranchOffset;
       else
         pc <= pc_next;
-    end
 
-    // Keep the current instruction if stalling.
-    if (!Stall) begin
-      // Discard the current instruction if branching or jumping.
       if (Branch || Jump)
+        // Discard the current instruction if branching or jumping.
         Inst <= 0;
       else
         Inst <= mem;
