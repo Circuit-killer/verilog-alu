@@ -10,6 +10,7 @@ module IDStage_tb();
   reg [31:0] WBData;
   reg [4:0] WBRd;
   reg Clk;
+  reg RegClk;
   wire Branch;
   wire Jump;
   wire Stall;
@@ -28,39 +29,39 @@ module IDStage_tb();
   wire [4:0] Rd;
 
   IDStage ids(Inst, EXRegWrite, EXMemRead, EXRd, MEMRegWrite, MEMData, MEMRd,
-    WBRegWrite, WBData, WBRd, Clk, Branch, Jump, Stall, BranchOffset,
+    WBRegWrite, WBData, WBRd, Clk, RegClk, Branch, Jump, Stall, BranchOffset,
     JumpAddress, ALUSrc, ALUControl, MemRead, MemWrite, RegWrite, DataA, DataB,
     SignExtend, Rs, Rt, Rd);
 
   initial begin
-    $monitor("%g:%b  S:%b  B:%b  BO:%h  J:%b  JA:%h  ALU:%b  CTRL:%b  MR:%b  MW:%b  RW:%b  DA:%h  DB:%h  SE:%h  Rs:%b  Rt:%b  Rd:%b",
+    $monitor("%g:%b S:%b B:%b BO:%h J:%b JA:%h ALU:%b CTRL:%b MR:%b MW:%b RW:%b DA:%h DB:%h SE:%h Rs:%b Rt:%b Rd:%b",
       $time, Clk, Stall, Branch, BranchOffset, Jump, JumpAddress, ALUSrc,
       ALUControl, MemRead, MemWrite, RegWrite, DataA, DataB, SignExtend, Rs, Rt,
       Rd);
 
-    EXRegWrite <= 0; EXMemRead <= 0; EXRd <= 0; MEMRegWrite <= 0; MEMData <= 0;
-    MEMRd <= 0; WBRegWrite <= 0; WBData <= 0; WBRd <= 0;
+    Inst <= 0; EXRegWrite <= 0; EXMemRead <= 0; EXRd <= 0; MEMRegWrite <= 0;
+    MEMData <= 0; MEMRd <= 0; WBRegWrite <= 0; WBData <= 0; WBRd <= 0; Clk <= 0;
 
     // add $0, $1, $0
     Inst <= 'b 000000_00000_00001_00000_00000_100000;
     Clk <= 1;
-    #1;
-    Clk <= ~Clk;
-    #1;
+    #8;
+    Clk <= 0;
+    #8;
 
     // beq $2, $3, 0
     Inst <= 'b 000100_00010_00011___0000_0000_0000_0000;
-    Clk <= ~Clk;
-    #1;
-    Clk <= ~Clk;
-    #1;
+    Clk <= 1;
+    #8;
+    Clk <= 0;
+    #8;
 
     // j 1
     Inst <= 'b 000010___0000_0000_0000_0000_0000_000001;
-    Clk <= ~Clk;
-    #1;
-    Clk <= ~Clk;
-    #1;
+    Clk <= 1;
+    #8;
+    Clk <= 0;
+    #8;
 
     // lw $1, ...
     // add $1, $1, $1
@@ -68,10 +69,10 @@ module IDStage_tb();
     EXRegWrite <= 1;
     EXRd <= 1;
     Inst <= 'b 000000_00001_00001_00001_00000_100000;
-    Clk <= ~Clk;
-    #1;
-    Clk <= ~Clk;
-    #1;
+    Clk <= 1;
+    #8;
+    Clk <= 0;
+    #8;
 
     // add $1, $1, $1
     // ...
@@ -83,10 +84,10 @@ module IDStage_tb();
     WBData <= 'h d00d_d00d;
     WBRegWrite <= 1;
     Inst <= 'b 000000_00001_00001_00001_00000_100000;
-    Clk <= ~Clk;
-    #1;
-    Clk <= ~Clk;
-    #1;
+    Clk <= 1;
+    #8;
+    Clk <= 0;
+    #8;
 
     $finish;
   end

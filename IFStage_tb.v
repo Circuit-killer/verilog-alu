@@ -14,15 +14,11 @@ module IFStage_tb();
 
     Branch <= 0; Jump <= 0; Stall <= 0; BranchOffset <= 0; JumpAddress <= 0;
 
-    // Start the clock high since module registers are zeroed at first.
+    // Simulate a cycle
     Clk <= 1;
-    #1;
-    Clk <= ~Clk;
-    #1;
-    Clk <= ~Clk;
-    #1;
-    Clk <= ~Clk;
-    #1;
+    #8;
+    Clk <= 0;
+    #8;
 
     $finish;
   end
