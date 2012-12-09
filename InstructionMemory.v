@@ -1,17 +1,15 @@
-module InstructionMemory(Address, Clk, ReadData);
-  parameter SLOT_SIZE = 32 - 1;
-  parameter NUM_SLOTS = 32 - 1;
-
-  input [31:0] Address;
-  input Clk;
-  output reg [SLOT_SIZE:0] ReadData;
-
-  reg [SLOT_SIZE:0] tab[NUM_SLOTS:0];
+module InstructionMemory(
+  input [31:0] Address,
+  input Clk,
+  output reg [31:0] ReadData
+);
+  parameter NUM_CELLS = 32 - 1;
+  reg [31:0] tab[NUM_CELLS:0];
 
   integer i;
   initial begin
     // Zero all the cells.
-    for (i = 0; i <= NUM_SLOTS; i = i + 1)
+    for (i = 0; i <= NUM_CELLS; i = i + 1)
       tab[i] <= 0;
 
     // addi $1, $0, 1

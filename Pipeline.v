@@ -1,6 +1,6 @@
 module Pipeline();
   reg Clk;
-  reg SubClk;
+  reg RegClk;
 
   wire [31:0] Inst;
   wire EXRegWrite;
@@ -35,7 +35,7 @@ module Pipeline();
   IFStage ifs(Branch, Jump, Stall, BranchOffset, JumpAddress, Clk, Inst);
 
   IDStage ids(Inst, EXRegWrite, EXMemRead, EXRd, MEMRegWrite, MEMData, MEMRd,
-    WBRegWrite, WBData, WBRd, Clk, SubClk, Branch, Jump, Stall, BranchOffset,
+    WBRegWrite, WBData, WBRd, Clk, RegClk, Branch, Jump, Stall, BranchOffset,
     JumpAddress, ALUSrc, ALUControl, MemRead, MemWrite, RegWrite, DataA, DataB,
     SignExtend, Rs, Rt, Rd);
 
@@ -46,7 +46,7 @@ module Pipeline();
   MEMStage ms(EXRegWrite, EXMemRead, EXMemWrite, EXRd, EXData, EXALUData, Clk,
     MEMRd, MEMData, MEMRegWrite);
 
-  WBStage wbs(MEMRd, MEMData, MEMRegWrite, SubClk, WBRd, WBData, WBRegWrite);
+  WBStage wbs(MEMRd, MEMData, MEMRegWrite, RegClk, WBRd, WBData, WBRegWrite);
 
   // Run the main clock at 5 ticks per cycle, one for each stage.
   initial begin
@@ -57,9 +57,9 @@ module Pipeline();
   // Run a clock cycle within the high cycle of the main clock so the registers
   // are written in WB before they're read in ID (in the next low cycle of Clk.)
   always @(posedge Clk) begin
-    SubClk <= 0;
+    RegClk <= 0;
     #1;
-    SubClk <= 1;
+    RegClk <= 1;
   end
 
   // Run for an arbitrary number of ticks so all instructions complete.
