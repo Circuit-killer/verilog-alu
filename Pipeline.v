@@ -64,7 +64,6 @@ module Pipeline();
 
   // Run for an arbitrary number of ticks so all instructions complete.
   initial begin
-    #350;
-    $finish;
+    #350 $finish;
   end
 endmodule
